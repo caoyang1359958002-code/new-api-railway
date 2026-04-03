@@ -2,7 +2,7 @@ FROM node:20-bookworm-slim AS builder
 
 WORKDIR /build
 COPY web/package.json .
-RUN npm install --no-audit --no-fund
+RUN npm install --legacy-peer-deps --no-audit --no-fund
 COPY ./web .
 COPY ./VERSION .
 RUN DISABLE_ESLINT_PLUGIN='true' VITE_REACT_APP_VERSION=$(cat VERSION) npm run build
