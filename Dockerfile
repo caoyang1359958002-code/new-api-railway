@@ -2,8 +2,7 @@ FROM node:20-bookworm-slim AS builder
 
 WORKDIR /build
 COPY web/package.json .
-COPY web/package-lock.json .
-RUN npm ci
+RUN npm install --no-audit --no-fund
 COPY ./web .
 COPY ./VERSION .
 RUN DISABLE_ESLINT_PLUGIN='true' VITE_REACT_APP_VERSION=$(cat VERSION) npm run build
